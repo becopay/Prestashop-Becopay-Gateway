@@ -1,0 +1,50 @@
+[
+    {
+        "name": "becopay/invoice_sdk_php",
+        "version": "v1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/becopay/Invoice_SDK_PHP.git",
+            "reference": "92d70782934e98857f2a107ad6aa3d9247e0ea64"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/becopay/Invoice_SDK_PHP/zipball/92d70782934e98857f2a107ad6aa3d9247e0ea64",
+            "reference": "92d70782934e98857f2a107ad6aa3d9247e0ea64",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4"
+        },
+        "time": "2018-10-24T14:13:29+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "becopay\\gateway\\": "src/"
+            },
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "becopay team",
+                "email": "io@becopay.com"
+            }
+        ],
+        "description": "Becopay payment gateway api php library",
+        "homepage": "https://becopay.com/en/io",
+        "keywords": [
+            "payment"
+        ]
+    }
+]

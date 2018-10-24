@@ -1,0 +1,25 @@
+{
+    "name": "becoapy/prestashop-payment-module",
+    "description": "becopay prestashop payment gateway",
+    "keywords": ["payment","gateway","payment gateway","becopay","prestashop"],
+    "homepage": "https://becopay.com/en/io",
+    "type": "prestashop-module",
+    "config": {
+        "vendor-dir": "becopay/vendor"
+    },
+    "support": {
+        "issues": "https://github.com/becopay/Prestashop-Becopay-Gateway/issues"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "becopay/invoice_sdk_php": "^1.0"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "becopat team",
+            "email": "io@becopay.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
