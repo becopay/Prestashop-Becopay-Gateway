@@ -63,13 +63,17 @@ class becopayValidationModuleFrontController extends ModuleFrontController
 
     public function __checkInvoice($paymentOrderId, $cart)
     {
+        global $currency;
+
         //get order total price
-        $total = $cart->getOrderTotal(true);
+        $total = floatval($cart->getOrderTotal(true));
+        $currency = $currency->iso_code;
 
         //get api service configuration
         $mobile = Configuration::get(BECOPAY_PREFIX . 'mobile');
         $apiBaseUrl = Configuration::get(BECOPAY_PREFIX . 'apiBaseUrl');
         $apiKey = Configuration::get(BECOPAY_PREFIX . 'apiKey');
+        $merchantCurrency = Configuration::get(BECOPAY_PREFIX . 'merchantCurrency') ?: DEFAULT_MERCHANT_CURRENCY;
 
         //get cart id
         $cartId = intval($cart->id);
@@ -90,12 +94,16 @@ class becopayValidationModuleFrontController extends ModuleFrontController
 
             if ($invoice) {
 
-                if ($invoice->price != intval($total)) {
+                if(
+                    $invoice->payerCur != $currency ||
+                    $invoice->payerAmount != $total ||
+                    $invoice->merchantCur != $merchantCurrency
+                ) {
                     error_log('invoice price not same. invoiceId:' . $invoice->id . ' ,card id : ' . $cartId . ', payment id:' . $becopayOrder['becopay_invoice_id'] .
                         ', cost = ' . $total . ', status = ' . $invoice->status);
                     return false;
                 }
-                //                $this->invoiceResponse = $invoice;
+
                 return $invoice;
 
             } else {

@@ -13,10 +13,20 @@ if (!defined('_PS_VERSION_'))
  * Define becopay prefix for use variable
  */
 define('BECOPAY_PREFIX', 'becopay_');
+/**
+* Merchant default currency
+*/
+define('DEFAULT_MERCHANT_CURRENCY', 'IRR');
 
 class Becopay extends PaymentModule
 {
+    /**
+     * @var string
+     */
     protected $_html = '';
+    /**
+     * @var array
+     */
     protected $_postErrors = array();
 
     /**
@@ -35,7 +45,7 @@ class Becopay extends PaymentModule
                 'description' => 'Enter the phone number you registered in the Becopay here'
             ),
             array(
-                'title' => 'Api Base URL',
+                'title' => 'Api Base URL ;',
                 'name' => 'apiBaseUrl',
                 'isRequired' => true,
                 'type' => 'url',
@@ -49,6 +59,14 @@ class Becopay extends PaymentModule
                 'type' => 'text',
                 'placeholder' => 'GEH45WS...',
                 'description' => 'Enter your Becopay Api Key here'
+            ),
+            array(
+                'title' => 'Merchant Currency',
+                'name' => 'merchantCurrency',
+                'isRequired' => false,
+                'type' => 'text',
+                'placeholder' => DEFAULT_MERCHANT_CURRENCY,
+                'description' => 'Enter your money\'s currency wants to receive.e.g: IRR, USD'
             ),
         )
     );
@@ -186,6 +204,10 @@ class Becopay extends PaymentModule
         return $becopay_option;
     }
 
+    /**
+     * @param $params
+     * @return mixed
+     */
     public function hookPayment($params)
     {
         global $smarty;
@@ -199,6 +221,10 @@ class Becopay extends PaymentModule
         return $this->display(__FILE__, '/view/payment.tpl');
     }
 
+    /**
+     * @param $params
+     * @return bool|void
+     */
     public function hookPaymentReturn($params)
     {
         if (!$this->active) {
